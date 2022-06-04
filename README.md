@@ -8,7 +8,7 @@ Like many others in its genre, the game is free-to-play, but players are encoura
 <hr>
 
 ## Final report
-For copy of the code, refer to [notebook](HeroesOfPymoli\HeroesOfPymoli_starter.ipynb)
+For copy of the code, refer to [notebook](HeroesOfPymoli/HeroesOfPymoli_starter.ipynb)
 
 ### Data wrangling
 
