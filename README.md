@@ -110,8 +110,10 @@ gender_demographics = pd.DataFrame({"Total Count": [male_players,female_players,
                                   index = ["Male", "Female", 'Other / Non-Disclosed'])
 
 # Calculate percentage of player by types and format with percentage style
-gender_demographics["Percentage of Players"] = round(gender_demographics.loc[:,"Total Count"] / total_player * 100,2)
-gender_demographics["Percentage of Players"] = gender_demographics["Percentage of Players"].map("{:.2f}%".format)
+gender_demographics["Percentage of Players"] = \
+    round(gender_demographics.loc[:,"Total Count"] / total_player * 100,2)
+gender_demographics["Percentage of Players"] = \
+    gender_demographics["Percentage of Players"].map("{:.2f}%".format)
 
 # Display gender demographic table
 gender_demographics
@@ -164,7 +166,8 @@ gender_purchase_analysis["Avg Total Purchase per Person"] = gender_purchase_anal
 
 # Apply format
 gender_purchase_analysis[["Average Purchase Price" , "Total Purchase Value" , "Avg Total Purchase per Person"]] = \
-    gender_purchase_analysis[["Average Purchase Price" , "Total Purchase Value" , "Avg Total Purchase per Person"]].applymap("${:,.2f}".format)
+    gender_purchase_analysis[["Average Purchase Price" , "Total Purchase Value" , "Avg Total Purchase per Person"]]\
+    .applymap("${:,.2f}".format)
 
 # Display the gender purchase table
 gender_purchase_analysis
@@ -307,7 +310,8 @@ pur_age_df["Avg Total Purchase per Person"] = pur_age_df["Total Purchase Value"]
 
 # Format with currency style
 pur_age_df[["Average Purchase Price","Total Purchase Value","Avg Total Purchase per Person"]] = \
-    pur_age_df[["Average Purchase Price","Total Purchase Value","Avg Total Purchase per Person"]].applymap("${:,.2f}".format) 
+    pur_age_df[["Average Purchase Price","Total Purchase Value","Avg Total Purchase per Person"]]\
+    .applymap("${:,.2f}".format) 
 
 # Display purchase by age table
 pur_age_df
