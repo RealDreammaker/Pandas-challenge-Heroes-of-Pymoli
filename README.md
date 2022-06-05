@@ -10,23 +10,15 @@ Like many others in its genre, the game is free-to-play, but players are encoura
 ## Final report
 For copy of the code, refer to [notebook](HeroesOfPymoli/HeroesOfPymoli_starter.ipynb)
 
-### Data wrangling
+### Observable trends
 
+1. Majority of players purchased game items are male players (84%). This gender group brought highest revenue to the company $1,967, although average purchase per person ($3.02) is lowest compared to the other groups.
 
-```python
-# Dependencies and Setup
-import pandas as pd
-import locale
+2. Almost half of the players are within 20 to 24 years old. This age group also purchased more items and brought highest revenue to the gaming company.
 
-# File to Load 
-file_to_load = "Resources/purchase_data.csv"
+3. Some items are priced lower than less popular items. For example, Final Critic is the most popular item with 13 sale transactions, and it was priced lower than the less popular item - Narvana. The company should price the items based on its popularity. Higher demand items should be more expensive to bring the company more profit.
 
-# Read Purchasing File and store into Pandas data frame
-purchase_data = pd.read_csv(file_to_load)
-```
-<br>
-
-#### Player Count
+### Player Count
 ```python
 # Use the length of list of screen names "SN", for total players.
 total_player = len(purchase_data["SN"].unique())
@@ -53,7 +45,7 @@ total_player_df
 </table>
 <br>
 
-#### Purchasing Analysis (Total)
+### Purchasing Analysis (Total)
 ```python
 # Calculations for unique items, average price, purchase count, and revenue
 unique_items = len(purchase_data["Item ID"].unique())
@@ -73,8 +65,6 @@ purchase_analysis = pd.DataFrame({"Number of Unique Items": [unique_items],
 # Format with currency style
 purchase_analysis[["Total Revenue" , "Average Price"]] = \
     purchase_analysis[["Total Revenue" , "Average Price"]].applymap("${:,.2f}".format)
-
-purchase_analysis
 ```
 <table class="dataframe" border="1">
   <thead>
@@ -114,9 +104,6 @@ gender_demographics["Percentage of Players"] = \
     round(gender_demographics.loc[:,"Total Count"] / total_player * 100,2)
 gender_demographics["Percentage of Players"] = \
     gender_demographics["Percentage of Players"].map("{:.2f}%".format)
-
-# Display gender demographic table
-gender_demographics
 ```
 <table class="dataframe" border="1">
   <thead>
@@ -168,9 +155,6 @@ gender_purchase_analysis["Avg Total Purchase per Person"] = gender_purchase_anal
 gender_purchase_analysis[["Average Purchase Price" , "Total Purchase Value" , "Avg Total Purchase per Person"]] = \
     gender_purchase_analysis[["Average Purchase Price" , "Total Purchase Value" , "Avg Total Purchase per Person"]]\
     .applymap("${:,.2f}".format)
-
-# Display the gender purchase table
-gender_purchase_analysis
 ```
 <table class="dataframe" border="1">
   <thead>
@@ -229,9 +213,6 @@ age_df["Percentage of Players"] = age_df["Total Count"] / total_player * 100
 
 # Format percentage with percentage and two decimal places 
 age_df["Percentage of Players"] = age_df["Percentage of Players"].map("{:.2f}%".format)
-
-# Display age demographic table
-age_df
 ```
 <table class="dataframe" border="1">
   <thead>
@@ -312,9 +293,6 @@ pur_age_df["Avg Total Purchase per Person"] = pur_age_df["Total Purchase Value"]
 pur_age_df[["Average Purchase Price","Total Purchase Value","Avg Total Purchase per Person"]] = \
     pur_age_df[["Average Purchase Price","Total Purchase Value","Avg Total Purchase per Person"]]\
     .applymap("${:,.2f}".format) 
-
-# Display purchase by age table
-pur_age_df
 ```
 <table class="dataframe" border="1">
   <thead>
@@ -387,7 +365,7 @@ pur_age_df
 </table>
 <br>
 
-Identify the the top 5 spenders in the game by total purchase value, then list (in a table):
+### Top Spenders 
 ```python
 # Group purchase data by screen names
 spenders_gb = purchase_data.groupby(["SN"])
@@ -412,9 +390,6 @@ spenders_df = spenders_df.sort_values("Total Purchase Value", ascending = False)
 # Format with currency style
 spenders_df[["Average Purchase Price","Total Purchase Value"]] = \
         spenders_df[["Average Purchase Price","Total Purchase Value"]].applymap("${:.2f}".format)
-
-# Display top spenders
-spenders_df.head()
 ```
 <table class="dataframe" border="1">
   <thead>
@@ -460,7 +435,7 @@ spenders_df.head()
 </table>
 <br>
 
-Identify the 5 most popular items by purchase count, then list (in a table):
+### Most Popular Items
 ```python
 # Group the item data by item id and item name 
 item_gb = purchase_data.groupby(["Item ID","Item Name"])
@@ -484,10 +459,6 @@ item_df_c = item_df.sort_values("Purchase count",  ascending = False)
 
 # Format with currency style
 item_df_c[["Item Price","Total Purchase Value"]] = item_df_c[["Item Price","Total Purchase Value"]].applymap("${:.2f}".format)
-
-# Display the most 5 popular items
-item_df_c.head()
-
 ```
 <table class="dataframe" border="1">
   <thead>
@@ -539,7 +510,7 @@ item_df_c.head()
 </table>
 <br>
 
-Identify the 5 most profitable items by total purchase value, then list (in a table):
+### Most Profitable Items
 
 ```python
 # Take the most_popular items data frame and change the sorting to find highest total purchase value
@@ -547,9 +518,6 @@ item_df = item_df.sort_values("Total Purchase Value",  ascending = False)
 
 # Format with currency style
 item_df[["Item Price","Total Purchase Value"]] = item_df[["Item Price","Total Purchase Value"]].applymap("${:.2f}".format)
-
-# Display the 5 most profitable items
-item_df.head()
 ```
 
 <table class="dataframe" border="1">
@@ -600,12 +568,3 @@ item_df.head()
     </tr>
   </tbody>
 </table>
-
-### Conclusions
-
-1. Majority of players purchased game items are male players (84%). This gender group brought highest revenue to the company $1,967, although average purchase per person ($3.02) is lowest compared to the other groups.
-
-2. Almost half of the players are within 20 to 24 years old. This age group also purchased more items and brought highest revenue to the gaming company.
-
-3. Some items are priced lower than less popular items. For example, Final Critic is the most popular item with 13 sale transactions, and it was priced lower than the less popular item - Narvana. The company should price the items based on its popularity. Higher demand items should be more expensive to bring the company more profit.
-
